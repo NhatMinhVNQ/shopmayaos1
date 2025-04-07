@@ -83,15 +83,29 @@
 </div>
 
 <script>
-  const adminPassword = "admin123"; // Mật khẩu quản trị viên (có thể thay đổi)
+  // Kiểm tra xem có tài khoản admin trong localStorage không
+  const admins = JSON.parse(localStorage.getItem("admins") || "[]");
 
-  // Kiểm tra nếu người dùng đã đăng nhập là admin
-  const enteredPassword = prompt("Nhập mật khẩu admin:");
-  if (enteredPassword !== adminPassword) {
-    alert("Mật khẩu sai!");
-    window.location.href = "index.html"; // Quay lại trang đăng nhập
+  // Nếu không có tài khoản admin, tạo một tài khoản mặc định
+  if (admins.length === 0) {
+    admins.push({ username: "admin", password: "admin123" });
+    localStorage.setItem("admins", JSON.stringify(admins));
   }
 
+  // Kiểm tra đăng nhập tài khoản admin
+  function checkAdminLogin() {
+    const storedUsername = localStorage.getItem("adminUsername");
+    const storedPassword = localStorage.getItem("adminPassword");
+
+    if (!storedUsername || !storedPassword) {
+      window.location.href = "admin-login.html"; // Chuyển đến trang đăng nhập admin
+    }
+  }
+
+  // Kiểm tra nếu người dùng là admin
+  checkAdminLogin();
+
+  // Tải danh sách người dùng
   function loadUsers() {
     const users = JSON.parse(localStorage.getItem("users") || "{}");
     const userList = document.getElementById("userList");
@@ -107,6 +121,7 @@
     }
   }
 
+  // Xóa tài khoản người dùng
   function deleteUser(username) {
     const users = JSON.parse(localStorage.getItem("users") || "{}");
     delete users[username];
@@ -114,8 +129,11 @@
     loadUsers(); // Tải lại danh sách người dùng
   }
 
+  // Đăng xuất
   function logout() {
-    window.location.href = "index.html";
+    localStorage.removeItem("adminUsername");
+    localStorage.removeItem("adminPassword");
+    window.location.href = "admin-login.html";
   }
 
   // Tải danh sách người dùng khi trang được tải
