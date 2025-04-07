@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản trị viên</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #84fab0, #8fd3f4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .admin-box {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .user-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .user-list li {
+      padding: 10px;
+      background: #f4f4f4;
+      margin: 5px 0;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .user-list li button {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .user-list li button:hover {
+      background: #c0392b;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="admin-box">
+  <h2>Quản trị viên</h2>
+  <ul class="user-list" id="userList"></ul>
+  <button onclick="logout()">Đăng xuất</button>
+</div>
+
+<script>
+  const adminPassword = "admin123"; // Mật khẩu quản trị viên (có thể thay đổi)
+
+  // Kiểm tra nếu người dùng đã đăng nhập là admin
+  const enteredPassword = prompt("Nhập mật khẩu admin:");
+  if (enteredPassword !== adminPassword) {
+    alert("Mật khẩu sai!");
+    window.location.href = "index.html"; // Quay lại trang đăng nhập
+  }
+
+  function loadUsers() {
+    const users = JSON.parse(localStorage.getItem("users") || "{}");
+    const userList = document.getElementById("userList");
+
+    userList.innerHTML = ""; // Xóa danh sách cũ
+
+    for (const username in users) {
+      if (users.hasOwnProperty(username)) {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `${username} <button onclick="deleteUser('${username}')">Xóa</button>`;
+        userList.appendChild(listItem);
+      }
+    }
+  }
+
+  function deleteUser(username) {
+    const users = JSON.parse(localStorage.getItem("users") || "{}");
+    delete users[username];
+    localStorage.setItem("users", JSON.stringify(users));
+    loadUsers(); // Tải lại danh sách người dùng
+  }
+
+  function logout() {
+    window.location.href = "index.html";
+  }
+
+  // Tải danh sách người dùng khi trang được tải
+  loadUsers();
+</script>
+
+</body>
+</html>
