@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SHOP BẢNG GIÁ UGPHONE</title>
+  <link rel="icon" href="https://i.imgur.com/ihmtfna.jpeg">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #fdf2f8, #ede9fe);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    #loading-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #fbcfe8, #c4b5fd);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    #loading-screen h1 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+
+    .loader {
+      border: 6px solid #f3e8ff;
+      border-top: 6px solid #a78bfa;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+
+    header {
+      background: linear-gradient(to right, #FFFFFF, #FFFFFF);
+      text-align: center;
+      padding: 1px 1px;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 15px;
+      background-color: #fce7f3;
+    }
+
+    nav a {
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #f3e8ff;
+      transform: scale(1.05);
+    }
+
+    .section {
+      display: none;
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .section.active {
+      display: block;
+      animation: fade 0.4s ease;
+    }
+
+    @keyframes fade { from {opacity: 0;} to {opacity: 1;} }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover { transform: translateY(-5px); }
+
+    .card img {
+      max-width: 120px;
+      margin-bottom: 10px;
+      border-radius: 50%;
+      filter: brightness(0.85);
+      opacity: 0.9;
+    }
+
+    .card h3 { color: #7c3aed; margin: 10px 0 5px; }
+
+    .card p { font-size: 14px; color: #555; }
+
+    .price-tag {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background-color: #f472b6;
+      color: white;
+      padding: 6px 12px;
+      font-weight: bold;
+      border-radius: 50px;
+      font-size: 13px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .buy-button {
+      display: inline-block;
+      margin-top: 10px;
+      background-color: #a855f7;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .buy-button:hover {
+      background-color: #9333ea;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      background-color: #f3e8ff;
+      color: #6b21a8;
+    }
+
+    .contact ul {
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    .contact li {
+      margin: 10px 0;
+    }
+
+    .contact li::before {
+      content: "🌸 ";
+    }
+  </style>
+</head>
+<body>
+
+<div id="loading-screen">
+  <h1>Đang tải Shop...</h1>
+  <div class="loader"></div>
+</div>
+
+<header>
+  <img src="https://i.imgur.com/pgbrGby.jpeg" alt="UGPHONE" style="max-width: 200px; border-radius: 1px; margin-bottom: 1px;">
+</header>
+
+<nav>
+  <a href="#" onclick="showSection('gioithieu')">Giới Thiệu</a>
+  <a href="#" onclick="showSection('dichvu')">Dịch Vụ</a>
+  <a href="#" onclick="showSection('lienhe')">Liên Hệ</a>
+</nav>
+
+<div id="gioithieu" class="section active">
+  <h2>☄️ Giới Thiệu</h2>
+  <p>Chào bạn đến với SHOPMAYAOS1 | Nơi Cung Cấp Máy Ảo UgPhone, Kiểm Tra Bảng Giá Ở Dịch Vụ Nhé , Còn Muốn Buy Bấm Vào "Mua Ngày" Nó Sẽ Đưa Bạn Tới Message Của Tôi ♥️</p>
+    <img src= "" alt="">
+  <h2>❗ Lưu Ý</h2>
+  <p>Nếu Bạn Đã Buy Rồi Không Thể Hoàn Lại Tiền, Nếu Bạn Buy Share Sẽ Không Bao Hành Cho Bạn, Hiện Tại UgPhone Đã Fixed Đổi 5 Lần 8 Giờ Và Giờ Chỉ Đổi 1 Lần / Ngày Nên Ngày Trong Dịch Vụ Không Chính Xác Đâu</p>
+    <img src="" alt="">
+ <h2>🔰 Check Uy Tín</h2>
+  <p>| 443 BCUT STORY | 78 BCUT HASTAG | Xem Full Ở Liên Hệ - Facebook Sẽ Có</p>
+</div>
+
+<div id="dichvu" class="section">
+  <h2>✨ Dịch Vụ Nổi Bật</h2>
+  <div class="card-grid">
+    <div class="card">
+      <span class="price-tag">130.000đ</span>
+      <img src="https://i.imgur.com/aFIoXbW.png" alt="">
+      <h3>MVIP 7 NGÀY + 1738 KC</h3>
+      <p>Đăng Nhập Gmail | TK/MK/CODE</p>
+      <a href="https://m.me/nhatminhvnz" target="_blank" class="buy-button">Liên hệ để mua</a>
+    </div>
+
+    <div class="card">
+      <span class="price-tag">140.000đ</span>
+      <img src="https://i.imgur.com/aFIoXbW.png" alt="">
+      <h3>SVIP 7 NGÀY + 1738 KC</h3>
+      <p>Đăng Nhập Gmail | TK/MK/CODE</p>
+      <a href="https://m.me/nhatminhvnz" target="_blank" class="buy-button">Liên hệ để mua</a>
+    </div>
+
+    <div class="card">
+      <span class="price-tag">50.000đ</span>
+      <img src="https://i.imgur.com/aFIoXbW.png" alt="">
+      <h3>UVIP 13 NGÀY</h3>
+      <p>Đăng Nhập Gmail | TK/MK/CODE</p>
+      <a href="https://m.me/nhatminhvnz" target="_blank" class="buy-button">Mua Ngay</a>
+    </div>
+
+    <div class="card">
+      <span class="price-tag">55.000đ</span>
+      <img src="https://i.imgur.com/aFIoXbW.png" alt="">
+      <h3>GVIP 13 NGÀY</h3>
+      <p>Đăng Nhập Gmail | TK/MK/CODE</p>
+      <a href="https://m.me/nhatminhvnz" target="_blank" class="buy-button">Liên hệ để mua</a>
+    </div>
+
+    <div class="card">
+      <span class="price-tag">170.000đ</span>
+      <img src="https://i.imgur.com/aFIoXbW.png" alt="">
+      <h3>UVIP 36 NGÀY</h3>
+      <p>Đăng Nhập Gmail | TK/MK/CODE</p>
+      <a href="https://m.me/nhatminhvnz" target="_blank" class="buy-button">Liên hệ để mua</a>
+    </div>
+
+    <div class="card">
+      <span class="price-tag">180.000đ</span>
+      <img src="https://i.imgur.com/aFIoXbW.png" alt="">
+      <h3>GVIP 36 NGÀY</h3>
+      <p>Đăng Nhập Gmail | TK/MK/CODE</p>
+      <a href="https://m.me/nhatminhvnz" target="_blank" class="buy-button">Liên hệ để mua</a>
+    </div>
+  </div>
+</div>
+
+<div id="lienhe" class="section contact">
+  <h2>📬 Liên Hệ</h2>
+  <p>Nếu bạn có câu hỏi hoặc muốn đặt dịch vụ, hãy liên hệ:</p>
+  <ul>
+    <li>Email: minhcucsuc132@gmail.com</li>
+    <li>Facebook: <a href="https://facebook.com/nhatminhvnz" target="_blank">fb.com/nhatminhvnz</a></li>
+    <li>Messenger: <a href="https://m.me/nhatminhvnz" target="_blank">Chat Facebook</a></li>
+    <li>Discord: quqnh</li>
+  </ul>
+</div>
+
+<footer>
+  © 2025 - Shop UGPHONE by Nhật Minh 🌸
+</footer>
+
+<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById("loading-screen").style.opacity = 0;
+      setTimeout(() => {
+        document.getElementById("loading-screen").style.display = "none";
+      }, 500);
+    }, 1800);
+  });
+
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => {
+      s.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
